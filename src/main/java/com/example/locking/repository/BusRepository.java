@@ -10,7 +10,12 @@ import java.util.Optional;
 
 public interface BusRepository extends CrudRepository<BusDetails, Long> {
 
-//	@Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
+	//	@Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	Optional<BusDetails> findWithLockingById(Long id);
+
+	// VERY important
+	// locking is made on an operation = a repository method
+	// isolation is made on a transaction = one or more service methods
+
 }
